@@ -1,13 +1,12 @@
 package jwt.auth.config;
 
 import jwt.auth.config.jwt.JwtAuthenticationFilter;
-import jwt.auth.filter.MyFilter1;
 import jwt.auth.filter.MyFilter3;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,8 +21,12 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig {
     private final CorsFilter corsFilter;
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        AuthenticationManager authenticationManager =  http.getSharedObject(AuthenticationManager.class);
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
+        //AuthenticationManager authenticationManager =  http.getSharedObject(AuthenticationManager.class);
 
         //servlet filter를 security filter에 등록하는 방법
         //servlet filter보다 security filter가 먼저 동작을한다.

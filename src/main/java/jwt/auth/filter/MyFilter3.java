@@ -21,7 +21,7 @@ public class MyFilter3 implements Filter {
         // 클라이언트에서 서버로 토큰이 넘어오면 이 토큰이 서버에서 만든 토큰이 맞는지 검증한다.( RSA, HS256 )
         if(request.getMethod().equals("POST")) {
             System.out.println("POST 요청 !");
-            String headerAuth = response.getHeader("Authorization");
+            String headerAuth = request.getHeader("Authorization");
             System.out.println("headerAuth : " + headerAuth);
 
             if(headerAuth.equals("ASDF")) {
