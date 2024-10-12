@@ -4,10 +4,7 @@ import jwt.auth.model.User;
 import jwt.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -31,5 +28,18 @@ public class RestApiController {
         userRepository.save(user);
         return "<h1>회원가입끝</h1>";
 
+    }
+
+    @GetMapping("/api/v1/user/{path}")
+    public String user(@PathVariable String path) {
+        return "<h1>user</h1>";
+    }
+    @GetMapping("/api/v1/manager/{path}")
+    public String manager(@PathVariable String path) {
+        return "<h1>manager</h1>";
+    }
+    @GetMapping("/api/v1/admin/{path}")
+    public String admin(@PathVariable String path) {
+        return "<h1>admin</h1>";
     }
 }
